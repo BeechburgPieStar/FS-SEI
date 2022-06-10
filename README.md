@@ -7,5 +7,6 @@ A brief introduction to this code:
 2. STC-CVCNN_Test: train LR classifer with few-shot training dataset (1-5-10-15-20 shots), and test it on test dataset. Here, this code executes 1000 times, because different few-shot training datasets have different performance.
 3. STC-CVCNN_SC: get silhouette coefficient
 
-The model weight is given in Model/
+Model weight is given in Model/
  
+Dataset will be uploaded soon.
