@@ -1,4 +1,4 @@
-# Few-Shot-Specific-Emitter-Identification-via-Deep-Metric-Ensemble-Learning
+# Radio-Frequency-Fingerprinting: Few-Shot-Specific-Emitter-Identification-via-Deep-Metric-Ensemble-Learning
 The code is about Few-Shot-Specific-Emitter-Identification-via-Deep-Metric-Ensemble-Learning under review
 
 Requirements: keras=2.2.4, tf=1.14.0
