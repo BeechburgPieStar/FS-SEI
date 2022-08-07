@@ -3,7 +3,7 @@ The code is about Few-Shot-Specific-Emitter-Identification-via-Deep-Metric-Ensem
 
 Requirements: keras=2.1.4, tf=1.14.0
 
-Paper: http://arxiv.org/abs/2207.06592
+Paper: http://arxiv.org/abs/2207.06592 or Y. Wang, et al., "Few-Shot Specific Emitter Identification via Deep Metric Ensemble Learning," in IEEE Internet of Things Journal, 2022, doi: 10.1109/JIOT.2022.3194967.
 
 A brief introduction to this code:
 1. STC-CVCNN_Train: train feature embedding on auxiliary dataset of 90 classes, and visualization based on test dataset of 10 classes
