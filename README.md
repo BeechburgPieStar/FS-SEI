@@ -12,6 +12,3 @@ A brief introduction to this code:
 Model weight is given in Model/
  
 Dataset: https://pan.baidu.com/s/1mca2YPeCqjvsXxOTLqVNhA, passwd: 4fhn
-
-
-#The future works: Distributed learning for FS-SEI
