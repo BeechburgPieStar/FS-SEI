@@ -10,10 +10,11 @@ A brief introduction to this code: (change 6000 to 4800)
 2. STC-CVCNN_Test: train LR classifer with few-shot training dataset (1-5-10-15-20 shots), and test it on test dataset. Here, this code executes 1000 times, because different few-shot training datasets have different performance.
 3. STC-CVCNN_SC: get silhouette coefficient
 
-# New result （100 Monte Carlo simulations）
 |  1  |  2  |  3  |  4  |  5  |
 |----|----|----|----|----|
 | 1   |   2 |   3 | 4   | 5   |
+
+# New result （100 Monte Carlo simulations）
 ![image](https://user-images.githubusercontent.com/107237593/200116737-5bf14012-04d3-47f8-9d5f-8f345c7ac80a.png)
 
 ![image](https://user-images.githubusercontent.com/107237593/200116816-067b8b0a-0913-46bc-b0ed-e2cdaf43d807.png)
