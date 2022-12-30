@@ -11,6 +11,7 @@ A brief introduction to this code: (change 6000 to 4800)
 3. STC-CVCNN_SC: get silhouette coefficient
 
 # New result （100 Monte Carlo simulations）
+# Different feature embedding with LR classifier
 |	C-K	|	FS CVCNN	|	Softmax	|	Siamese	|	Triplet	|	SR2CNN	|	*STC	|	ST	|	SC	|
 |	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|
 |	10-1	|	10.00%	|	41.30%	|	50.60%	|	75.98%	|	85.04%	|	87.66%	|	73.35%	|	85.37%	|
@@ -29,7 +30,7 @@ A brief introduction to this code: (change 6000 to 4800)
 |	30-15	|	54.57%	|	69.99%	|	62.79%	|	70.12%	|	75.58%	|	80.14%	|	73.68%	|	73.89%	|
 |	30-20	|	63.30%	|	74.04%	|	65.70%	|	72.62%	|	77.77%	|	81.37%	|	76.20%	|	75.52%	|
 
-
+# STC-based feature embedding with diffferent classifiers
 |	LR	|	LR-3models	|	LR-5models	|	LR-7models	|	KNN	|	RF	|	SVM
 |	----	|	----	|	----	|	----	|	----	|	----	|	----
 |	87.66%	|	89.07%	|	90.12%	|	89.84%	|	21.12%	|	78.21%	|	86.75%
