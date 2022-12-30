@@ -10,7 +10,8 @@ A brief introduction to this code: (change 6000 to 4800)
 2. STC-CVCNN_Test: train LR classifer with few-shot training dataset (1-5-10-15-20 shots), and test it on test dataset. Here, this code executes 1000 times, because different few-shot training datasets have different performance.
 3. STC-CVCNN_SC: get silhouette coefficient
 
-|	C-K	|	FS CVCNN	|	Softmax	|	Siamese	|	Triplet	|	SR2CNN	|	STC	|	ST	|	SC	|
+# New result （100 Monte Carlo simulations）
+|	C-K	|	FS CVCNN	|	Softmax	|	Siamese	|	Triplet	|	SR2CNN	|	__STC	|	ST	|	SC	|
 |	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|
 |	10-1	|	10.00%	|	41.30%	|	50.60%	|	75.98%	|	85.04%	|	87.66%	|	73.35%	|	85.37%	|
 |	10-5	|	47.80%	|	75.26%	|	77.51%	|	90.18%	|	93.01%	|	93.99%	|	88.66%	|	93.05%	|
@@ -29,8 +30,7 @@ A brief introduction to this code: (change 6000 to 4800)
 |	30-20	|	63.30%	|	74.04%	|	65.70%	|	72.62%	|	77.77%	|	81.37%	|	76.20%	|	75.52%	|
 
 
-# New result （100 Monte Carlo simulations）
-![image](https://user-images.githubusercontent.com/107237593/200116737-5bf14012-04d3-47f8-9d5f-8f345c7ac80a.png)
+
 
 ![image](https://user-images.githubusercontent.com/107237593/200116816-067b8b0a-0913-46bc-b0ed-e2cdaf43d807.png)
 
