@@ -11,7 +11,7 @@ A brief introduction to this code: (change 6000 to 4800)
 3. STC-CVCNN_SC: get silhouette coefficient
 
 # New result （100 Monte Carlo simulations）
-|	C-K	|	FS CVCNN	|	Softmax	|	Siamese	|	Triplet	|	SR2CNN	|	__STC	|	ST	|	SC	|
+|	C-K	|	FS CVCNN	|	Softmax	|	Siamese	|	Triplet	|	SR2CNN	|	*STC	|	ST	|	SC	|
 |	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|
 |	10-1	|	10.00%	|	41.30%	|	50.60%	|	75.98%	|	85.04%	|	87.66%	|	73.35%	|	85.37%	|
 |	10-5	|	47.80%	|	75.26%	|	77.51%	|	90.18%	|	93.01%	|	93.99%	|	88.66%	|	93.05%	|
