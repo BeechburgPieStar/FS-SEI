@@ -6,7 +6,7 @@ Created on Wed Sep  8 15:44:04 2021
 """
 import tensorflow as tf
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 from keras.backend.tensorflow_backend import set_session  
 config = tf.ConfigProto()  
 config.gpu_options.allow_growth = True  
@@ -31,7 +31,6 @@ import keras
 from keras.layers.core import Dropout,Flatten
 from unit.triplet_losses import batch_all_triplet_loss
 from unit.triplet_metrics import triplet_accuracy
-import random
 
 def TrainDataset(num):
     x = np.load(f"Dataset/X_train_{num}Class.npy")
@@ -40,35 +39,11 @@ def TrainDataset(num):
     X_train, X_val, Y_train, Y_val = train_test_split(x, y, test_size = 0.1, random_state= 30)
     return X_train, X_val, Y_train, Y_val
 
-def TrainDatasetKshotRround(num, k):
-    x = np.load(f"Dataset/X_train_{num}Class.npy")
-    y = np.load(f"Dataset/Y_train_{num}Class.npy")
-    y = y.astype(np.uint8)
-
-    List_train = y.tolist()
-
-    X_train_K_Shot = np.zeros([int(k*num), 4800, 2])
-    Y_train_K_Shot = np.zeros([int(k*num)])
-
-    for i in range(num):
-        index_train_start = List_train.index(i)
-        if i == num-1:
-            index_train_end = y.shape[0]
-        else:
-            index_train_end = List_train.index(i+1)-1
-        index_shot = range(index_train_start, index_train_end)
-        random_shot = random.sample(index_shot, k)
-
-        X_train_K_Shot[i*k:i*k+k,:,:] = x[random_shot,:,:]       
-        Y_train_K_Shot[i*k:i*k+k] = y[random_shot]
-    return X_train_K_Shot, Y_train_K_Shot
-
 def TestDataset(num):
     x = np.load(f"Dataset/X_test_{num}Class.npy")
     y = np.load(f"Dataset/Y_test_{num}Class.npy")
     y = y.astype(np.uint8)
     return x, y
-
 
 def base_model():
     x_input = Input(shape=(4800, 2))
@@ -139,45 +114,49 @@ Y_val = to_categorical(value_Y_val)
 
 model.load_weights(f"Model/STC-CVCNN_lambda={lambda_T}_m={margin}.hdf5")
 
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
-from sklearn.linear_model import LogisticRegression
-from warnings import filterwarnings
-filterwarnings('ignore')
 
-Ks = [1, 5, 10, 15, 20]#
-num_Ks = np.shape(Ks)[0]
-Ns = [10, 20, 30]#
-num_Ns = np.shape(Ns)[0]
-Rs = 100
-acc = np.zeros([int(num_Ks*num_Ns), Rs])
+import sklearn
+import numpy as np
+import matplotlib.patheffects as PathEffects
+import seaborn as sns
+import matplotlib.pyplot as plt
+import tensorflow as tf
+from sklearn import manifold
+from scipy.optimize import linear_sum_assignment as linear_assignment
 
-import time
-for r in range(Rs):
-    t1 = time.time()
-    print(f"--------r={r}---------")
-    for n in range(num_Ns):
-        X_test, Y_test = TestDataset(Ns[n])
-        X_test = (X_test - min_value)/(max_value - min_value)
-        X_test_feature = base_model.predict(X_test,verbose=0)
-        for k in range(num_Ks):
-            x, y = TrainDatasetKshotRround(Ns[n], Ks[k])
-            x = (x - min_value)/(max_value - min_value)
-            x_feature  = base_model.predict(x)
-            clf = LogisticRegression()#KNeighborsClassifier()
-            clf.fit(x_feature, y)            
-            acc[n*num_Ks + k, r] = clf.score(X_test_feature, Y_test)
-    t2 = time.time()
-    print(t2 - t1)
 
-import pandas as pd
-df = pd.DataFrame(acc)
-df.to_excel(f"Result/STC-CVCNN_m={margin}.xlsx", index=False)
+def visualizeData(Z, labels, num_clusters, title):
 
-acc_3m = np.zeros([int(num_Ks*num_Ns), 3])
-acc_3m[:, 0] = np.mean(acc, axis = 1)
-acc_3m[:, 1] = np.max(acc, axis = 1)
-acc_3m[:, 2] = np.min(acc, axis = 1)
+    labels = labels.astype(int)
+    tsne = manifold.TSNE(n_components=2)  # init='pca'
+    Z_tsne = tsne.fit_transform(Z)
+    fig = plt.figure()
+    plt.scatter(Z_tsne[:, 0], Z_tsne[:, 1], s=1, c=labels, cmap=plt.cm.get_cmap("jet", num_clusters))
+    plt.colorbar(ticks=range(num_clusters))
+    fig.savefig(title, dpi=600)
 
-df = pd.DataFrame(acc_3m, columns=['mean','max', 'min'])
-df.to_excel(f"Result/STC-CVCNN_m={margin}_3m.xlsx", index=False)
+
+# 聚类精度计算
+def cluster_acc(y_true, y_pred):
+    y_true = y_true.astype(np.int64)
+    assert y_pred.size == y_true.size
+    D = max(y_pred.max(), y_true.max()) + 1
+    w = np.zeros((D, D), dtype=np.int64)
+    for i in range(y_pred.size):
+        w[y_pred[i], y_true[i]] += 1
+    ind = linear_assignment(w.max() - w)
+    ind = np.array(ind).T
+    return sum([w[i, j] for i, j in ind]) * 1.0 / y_pred.size
+
+def get_silhouette(X, labels_pred):
+    ss = sklearn.metrics.silhouette_score(X, labels_pred)
+    print(ss)
+
+n_classes = 30
+X_test, Y_test = TestDataset(n_classes)
+X_test = (X_test - min_value)/(max_value - min_value)
+X_test_feature = base_model.predict(X_test,verbose=0)
+
+subtitle = 'STC CVCNN'
+visualizeData(X_test_feature, Y_test, n_classes, f"Visualization/{n_classes}classes_{subtitle}.png")
+print(get_silhouette(X_test_feature, Y_test))

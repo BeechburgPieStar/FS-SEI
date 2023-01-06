@@ -5,6 +5,8 @@ Created on Wed Sep  8 15:44:04 2021
 @author: 15851
 """
 import tensorflow as tf
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 from keras.backend.tensorflow_backend import set_session  
 config = tf.ConfigProto()  
 config.gpu_options.allow_growth = True  
@@ -44,7 +46,7 @@ def TestDataset(num):
     return x, y
 
 def base_model():
-    x_input = Input(shape=(6000, 2))
+    x_input = Input(shape=(4800, 2))
     x = ComplexConv1D(64, 3, activation='relu', padding='same')(x_input)
     x = ComplexBatchNormalization()(x)
     x = MaxPooling1D(pool_size= 2)(x)
@@ -110,7 +112,8 @@ X_val = (X_val- min_value)/(max_value - min_value)
 Y_train = to_categorical(value_Y_train)
 Y_val = to_categorical(value_Y_val)
 
-checkpoint = ModelCheckpoint(f"Model/STC CVCNN_lambda={lambda_T}_m={margin}hdf5", 
+
+checkpoint = ModelCheckpoint(f"Model/STC-CVCNN_lambda={lambda_T}_m={margin}.hdf5", #_{submodel}submodel = 15
                              verbose=1, 
                              save_best_only=True)
 model.fit([X_train,value_Y_train], [Y_train, value_Y_train,value_Y_train],
@@ -118,47 +121,5 @@ model.fit([X_train,value_Y_train], [Y_train, value_Y_train,value_Y_train],
           validation_data=([X_val,value_Y_val], [Y_val, value_Y_val,value_Y_val]),
           batch_size=32,
           epochs=200,
+          verbose=2,
           callbacks=[checkpoint])
-
-model.load_weights(f"Model/STC CVCNN_lambda={lambda_T}_m={margin}.hdf5")
-
-
-from sklearn.manifold import TSNE
-import numpy as np
-import matplotlib.patheffects as PathEffects
-import seaborn as sns
-import matplotlib.pyplot as plt
-import tensorflow as tf
-
-
-def scatter(features, labels, subtitle=None, n_classes = 10):
-    # We choose a color palette with seaborn.
-    palette = np.array(sns.color_palette("hls", n_classes))#"hls", 
-    # We create a scatter plot.
-    f = plt.figure(figsize=(8, 8))
-    ax = plt.subplot(aspect='equal')
-    sc = ax.scatter(features[:, 0], features[:, 1], lw=0, s=40, c = palette[labels, :])#
-    plt.xlim(-25, 25)
-    plt.ylim(-25, 25)
-    ax.axis('off')
-    ax.axis('tight')
-    plt.legend()
-
-    txts = []
-    for i in range(n_classes):
-        xtext, ytext = np.median(features[labels == i, :], axis=0)
-        txt = ax.text(xtext, ytext, str(i), fontsize=24)
-        txt.set_path_effects([
-            PathEffects.Stroke(linewidth=5, foreground="w"),
-            PathEffects.Normal()])
-        txts.append(txt)
-
-    plt.savefig(f"Visualization/{n_classes}classes_{subtitle}.png", dpi = 600)
-
-n_classes = 10
-X_test, Y_test = TestDataset(n_classes)
-X_test = (X_test - min_value)/(max_value - min_value)
-X_test_feature = base_model.predict(X_test,verbose=0)
-tsne = TSNE(n_components = 2)
-eval_tsne_embeds = tsne.fit_transform(X_test_feature)
-scatter(eval_tsne_embeds, Y_test, f"STC CVCNN", n_classes)
