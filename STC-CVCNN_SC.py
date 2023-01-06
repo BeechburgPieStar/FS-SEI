@@ -135,19 +135,6 @@ def visualizeData(Z, labels, num_clusters, title):
     plt.colorbar(ticks=range(num_clusters))
     fig.savefig(title, dpi=600)
 
-
-# 聚类精度计算
-def cluster_acc(y_true, y_pred):
-    y_true = y_true.astype(np.int64)
-    assert y_pred.size == y_true.size
-    D = max(y_pred.max(), y_true.max()) + 1
-    w = np.zeros((D, D), dtype=np.int64)
-    for i in range(y_pred.size):
-        w[y_pred[i], y_true[i]] += 1
-    ind = linear_assignment(w.max() - w)
-    ind = np.array(ind).T
-    return sum([w[i, j] for i, j in ind]) * 1.0 / y_pred.size
-
 def get_silhouette(X, labels_pred):
     ss = sklearn.metrics.silhouette_score(X, labels_pred)
     print(ss)
