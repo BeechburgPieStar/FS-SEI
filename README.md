@@ -49,7 +49,7 @@ A brief introduction to this code: (change 6000 to 4800)
 |	80.14%	|	84.85%	|	85.40%	|	85.88%	|	75.36%	|	78.57%	|	77.51%
 |	81.37%	|	86.36%	|	86.79%	|	87.48%	|	77.62%	|	80.19%	|	79.26%
 
-# The influence of different sets of few-shot training samples
+# The influence of different sets of few-shot training samples (left: 10-way-shot with STC CVCNN and LR; right: 10-way-1-shot with STC CVCNN)
 ![image](https://user-images.githubusercontent.com/107237593/211043674-bd5b21e6-e5f7-4208-9298-787d90820bf4.png)
 ![image](https://user-images.githubusercontent.com/107237593/211043693-e96c4216-1498-4445-a9d1-2d4c3a171a1b.png)
 
