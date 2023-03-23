@@ -2,7 +2,7 @@
 
 Requirements: keras=2.1.4, tf=1.14.0
 
-Paper: http://arxiv.org/abs/2207.06592 or Y. Wang, et al., "Few-Shot Specific Emitter Identification via Deep Metric Ensemble Learning," in IEEE Internet of Things Journal, 2022, doi: 10.1109/JIOT.2022.3194967.
+Paper: http://arxiv.org/abs/2207.06592 or Y. Wang, G. Gui, Y. Lin, H. -C. Wu, C. Yuen and F. Adachi, "Few-Shot Specific Emitter Identification via Deep Metric Ensemble Learning," in IEEE Internet of Things Journal, vol. 9, no. 24, pp. 24980-24994, 15 Dec.15, 2022, doi: 10.1109/JIOT.2022.3194967.
 
 # Change ADS-B 6000-> ADS-B 4800 (Remove the ICAO code) model weight, dataset and results are updated
 A brief introduction to this code: (change 6000 to 4800)
