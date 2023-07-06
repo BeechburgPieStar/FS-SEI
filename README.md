@@ -7,7 +7,7 @@ Paper: http://arxiv.org/abs/2207.06592 or Y. Wang, G. Gui, Y. Lin, H. -C. Wu, C.
 # Change ADS-B 6000-> ADS-B 4800 (Remove the ICAO code) model weight, dataset and results are updated
 A brief introduction to this code: (change 6000 to 4800)
 1. STC-CVCNN_Train: train feature embedding on auxiliary dataset of 90 classes, and visualization based on test dataset of 10 classes
-2. STC-CVCNN_Test: train LR classifer with few-shot training dataset (1-5-10-15-20 shots), and test it on test dataset. Here, this code executes 1000 times, because different few-shot training datasets have different performance.
+2. STC-CVCNN_Test: train LR classifer with few-shot training dataset (1-5-10-15-20 shots), and test it on test dataset. Here, this code executes 100 times, because different few-shot training datasets have different performance.
 3. STC-CVCNN_SC: feature visualization & get silhouette coefficient
 
 # New result （100 Monte Carlo simulations）
