@@ -49,7 +49,7 @@ A brief introduction to this code: (change 6000 to 4800)
 |	30-15	|	80.14%	|	84.85%	|	85.40%	|	85.88%	|	75.36%	|	78.57%	|	77.51%
 |	30-20	|	81.37%	|	86.36%	|	86.79%	|	87.48%	|	77.62%	|	80.19%	|	79.26%
 
-# STC-based feature embedding with diffferent classifiers (PyTorch)
+# STC-based feature embedding with different classifiers (PyTorch)
 * The values in parentheses represent the 95% confidence interval.
 
 |	C-K	 |	 LR	 |	KNN	 |	SVM	 |
