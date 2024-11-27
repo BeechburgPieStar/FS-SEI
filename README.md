@@ -5,7 +5,7 @@ Requirements: keras=2.1.4, tf=1.14.0
 Paper: http://arxiv.org/abs/2207.06592 or Y. Wang, G. Gui, Y. Lin, H. -C. Wu, C. Yuen and F. Adachi, "Few-Shot Specific Emitter Identification via Deep Metric Ensemble Learning," in IEEE Internet of Things Journal, vol. 9, no. 24, pp. 24980-24994, 15 Dec.15, 2022, doi: 10.1109/JIOT.2022.3194967.
 
 # Change ADS-B 6000-> ADS-B 4800 (Remove the ICAO code, which can result in inflated accuracy) 
-![image](https://github.com/user-attachments/assets/0370c785-aaa1-4a81-9530-4ffd6c07ed1d)
+![image](https://github.com/user-attachments/assets/8b4c15fb-2b1c-4440-8587-5fe447850113)
 
 Model weight, dataset and results are updated
 1. STC-CVCNN_Train: train feature embedding on auxiliary dataset of 90 classes, and visualization based on test dataset of 10 classes
