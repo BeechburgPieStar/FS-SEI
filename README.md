@@ -6,6 +6,7 @@ Paper: http://arxiv.org/abs/2207.06592 or Y. Wang, G. Gui, Y. Lin, H. -C. Wu, C.
 
 # Change ADS-B 6000-> ADS-B 4800 (Remove the ICAO address, which can result in inflated accuracy) 
 ![image](https://github.com/user-attachments/assets/8b4c15fb-2b1c-4440-8587-5fe447850113)
+(From: Y. Wang and G. Gui, "Consistency-Guided Robust Learning for Content-Agnostic Radio Frequency Fingerprinting," in IEEE Communications Letters, vol. 29, no. 3, pp. 610-614, March 2025.)
 
 Model weight, dataset and results are updated
 1. STC-CVCNN_Train: train feature embedding on auxiliary dataset of 90 classes, and visualization based on test dataset of 10 classes
